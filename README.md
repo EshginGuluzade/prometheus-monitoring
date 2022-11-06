@@ -16,11 +16,8 @@ I will install prometheus in my *Linux Machine - CentOS* which runs in [Google C
 
 You can use `wget` command to download the compressed file. Copy the link address of the file that you want to download and then run the command in your terminal.
 
-`
+![install binary](https://user-images.githubusercontent.com/67023632/200175277-5909e240-4ad1-4d1a-a743-50b407c5f183.png)
 
-wget "link address"
-
-`
 
 **2.**  
 
