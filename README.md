@@ -76,6 +76,8 @@ If you use google cloud, follow these steps:
 
 ![Screenshot 2022-11-06 at 17 07 15](https://user-images.githubusercontent.com/67023632/200178751-9c666d63-8c6e-4fa4-8715-e5e52d9b0e1c.png)
 
+5. If you execute `up` command, it will show you instances which are in UP state. Right now, we only have one instance and since the prometheus runs on this instance, it will show this nessage `up{instance="localhost:9090", job="prometheus"}`
+
 
 **What is Node Exporter?** 
 
