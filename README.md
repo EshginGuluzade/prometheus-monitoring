@@ -59,30 +59,32 @@ systemctl restart firewalld
 
 If you use google cloud, follow these steps:
 
-1. Go to VPC network/Firewall.
+- Go to VPC network/Firewall.
 
 ![Screenshot 2022-11-06 at 16 51 20](https://user-images.githubusercontent.com/67023632/200177832-289e253a-f356-401f-838a-1a01248d6471.png)
 
 
-2. Create a new firewall rule.
+- Create a new firewall rule.
 
 ![Screenshot 2022-11-06 at 16 55 48](https://user-images.githubusercontent.com/67023632/200178090-3def84a5-058a-46e7-9662-f4b60da748bd.png)
 
-3. Use below configuration and press *create* button.
+- Use below configuration and press *create* button.
 
 ![Screenshot 2022-11-06 at 17 02 55](https://user-images.githubusercontent.com/67023632/200178509-7f811553-5937-4a89-810b-1735f4bcf2d2.png)
 
-4. Go to external IP of the instance using port 9090. In my case, it is `https://34.88.246.220:9090/`
+- Go to external IP of the instance using port 9090. In my case, it is `https://34.88.246.220:9090/`
 
 ![Screenshot 2022-11-06 at 17 07 15](https://user-images.githubusercontent.com/67023632/200178751-9c666d63-8c6e-4fa4-8715-e5e52d9b0e1c.png)
 
-5. If you execute `up` command, it will show you instances which are in UP state. Right now, we only have one instance and since the prometheus runs on this instance, it will display this nessage `up{instance="localhost:9090", job="prometheus"}`. If we add IP adresses of other instances to configuration file of prometheus, it will display those instances,as well. We will add another instance when we install node exporter in part 2.
+- If you execute `up` command, it will show you instances which are in UP state. Right now, we only have one instance and since the prometheus runs on this instance, it will display this nessage `up{instance="localhost:9090", job="prometheus"}`. If we add IP adresses of other instances to configuration file of prometheus, it will display those instances,as well. We will add another instance when we install node exporter in part 2.
 
 ![Screenshot 2022-11-06 at 17 17 38](https://user-images.githubusercontent.com/67023632/200179171-44b832a1-92f0-4202-8c03-94ee9daab096.png)
 
-6. You can also access Prometheus metrics by visiting `http://localhost:9090/` for local machine or `https://34.88.246.220:9090/` for google cloud instance.
+- You can also access Prometheus metrics by visiting `http://localhost:9090/` for local machine or `https://34.88.246.220:9090/` for google cloud instance.
 
 ![Screenshot 2022-11-06 at 17 20 24](https://user-images.githubusercontent.com/67023632/200179262-acdbb2cb-a8f6-4683-b326-114b43409287.png)
+
+**7** 
 
 
 # Part 2 - Node Exporter
