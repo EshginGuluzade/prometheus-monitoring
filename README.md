@@ -1,4 +1,4 @@
-# Part 1 - Prometheus and Node Exporter
+# Part 1 - Prometheus
 
 ## 1. Setting Up Prometheus 
 
@@ -76,8 +76,11 @@ If you use google cloud, follow these steps:
 
 ![Screenshot 2022-11-06 at 17 07 15](https://user-images.githubusercontent.com/67023632/200178751-9c666d63-8c6e-4fa4-8715-e5e52d9b0e1c.png)
 
-5. If you execute `up` command, it will show you instances which are in UP state. Right now, we only have one instance and since the prometheus runs on this instance, it will show this nessage `up{instance="localhost:9090", job="prometheus"}`
+5. If you execute `up` command, it will show you instances which are in UP state. Right now, we only have one instance and since the prometheus runs on this instance, it will display this nessage `up{instance="localhost:9090", job="prometheus"}`. If we add IP adresses of other instances to configuration file of prometheus, it will display those instances,as well. We will add another instance when we install node exporter in part 2.
 
+# Part 2 - Node Exporter
+
+## 1. Setting Up Prometheus 
 
 **What is Node Exporter?** 
 
