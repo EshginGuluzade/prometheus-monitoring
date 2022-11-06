@@ -84,12 +84,81 @@ If you use google cloud, follow these steps:
 
 ![Screenshot 2022-11-06 at 17 20 24](https://user-images.githubusercontent.com/67023632/200179262-acdbb2cb-a8f6-4683-b326-114b43409287.png)
 
-**7** 
+### Setup Prometheus as Ssytemd Service [Optional]
+
+**1** In step 3, we said that in order to start prometheus server we need to use command `./prometheus` from the extracted directory. The problem with this method is that it will keep your terminal and you will not be able to run other commands in the terminal session. If you want to run other commands you will need to stop it by `Ctrl + C`. Therefore, to remove this issue, it is better to setup Prometheus as **Systemd service**.
+
+**2** Create prometheus user, required directories and make prometheus user as owner of the directories.
+
+``` bash
+useradd --no-create-home --shell /bin/false prometheus
+mkdir /etc/prometheus
+mkdir /var/lib/prometheus
+chown prometheus:prometheus /etc/prometheus
+chown prometheus:prometheus /var/lib/prometheus
+```
+
+**3** Copy *prometheus* and *promtool* from the extracted directory to */usr/local/bin* and change the ownership to prometheus.
+
+``` bash
+cp /root/prometheus/prometheus-2.37.2.linux-amd64/prometheus /usr/local/bin/
+cp /root/prometheus/prometheus-2.37.2.linux-amd64/promtool /usr/local/bin/
+chown prometheus:prometheus /usr/local/bin/prometheus
+chown prometheus:prometheus /usr/local/bin/promtool
+```
+
+**4** Copy *consoles*, *console_libraries* and *prometheus.yml* file from the extracted directory to */etc/prometheus* and change the ownership to prometheus.
+
+``` bash
+cp -r /root/prometheus/prometheus-2.37.2.linux-amd64/consoles /etc/prometheus
+cp -r /root/prometheus/prometheus-2.37.2.linux-amd64/console_libraries /etc/prometheus
+cp /root/prometheus/prometheus-2.37.2.linux-amd64/prometheus.yml /etc/prometheus
+chown -R prometheus:prometheus /etc/prometheus/consoles
+chown -R prometheus:prometheus /etc/prometheus/console_libraries
+chown prometheus:prometheus /etc/prometheus/prometheus.yml
+```
+
+**5** Create Prometheus service file.
+
+``` bash
+vi /etc/systemd/system/prometheus.service
+```
+
+**6** Copy the following content to that file and save.
+
+``` 
+[Unit]
+Description=Prometheus
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+ExecStart=/usr/local/bin/prometheus \
+    --config.file /etc/prometheus/prometheus.yml \
+    --storage.tsdb.path /var/lib/prometheus/ \
+    --web.console.templates=/etc/prometheus/consoles \
+    --web.console.libraries=/etc/prometheus/console_libraries
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**7** Reload the systemd service, enable service to start at boot time and start the service.
+
+``` bash
+systemctl daemon-reload
+systemctl enable prometheus
+systemctl start prometheus
+```
+**8** Go to Prometheus Web UI address - `http://localhost:9090/` for local machine or `https://34.88.246.220:9090/` for google cloud instance.
 
 
 # Part 2 - Node Exporter
 
-## 1. Setting Up Prometheus 
+## 1. Setting Up Node Exporter
 
 **What is Node Exporter?** 
 
