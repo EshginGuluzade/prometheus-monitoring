@@ -18,7 +18,8 @@ You can use `wget` command to download the compressed file. Copy the link addres
 
 ![install binary](https://user-images.githubusercontent.com/67023632/200175277-5909e240-4ad1-4d1a-a743-50b407c5f183.png)
 
-![Screenshot 2022-11-06 at 16 04 13](https://user-images.githubusercontent.com/67023632/200175495-e01e2e5f-3ff6-41e1-8312-6ec676931c38.png)
+![Screenshot 2022-11-06 at 16 08 13](https://user-images.githubusercontent.com/67023632/200175512-4244151c-62a0-45be-9e89-59b55f839d8c.png)
+
 
 
 **2.**  Create directory called `prometheus` and extract the downloaded file to that directory.
