@@ -12,6 +12,7 @@ I will install prometheus in my *Linux Machine - CentOS* which runs in [Google C
 
 1. From [Prometheus Download](https://prometheus.io/download/) page, download latest stable version in `/tmp` directory. At the time of writing this tutorial, latest stable version is 2.37.2.
 
+![Screenshot 2022-11-06 at 15 53 56](https://user-images.githubusercontent.com/67023632/200174808-2a09e7f1-d069-4c04-bd12-b2754adc1c2d.png)
 
 
 **What is Node Exporter?** 
