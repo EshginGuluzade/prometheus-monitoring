@@ -21,16 +21,26 @@ You can use `wget` command to download the compressed file. Copy the link addres
 ![Screenshot 2022-11-06 at 16 08 13](https://user-images.githubusercontent.com/67023632/200175512-4244151c-62a0-45be-9e89-59b55f839d8c.png)
 
 
-
-
-**2.**  Create directory called **prometheus** and extract the downloaded file to that directory.
+**2.**  Create directory called **prometheus** and extract the downloaded file to that directory. Then you can delete zip file.
 
 ``` bash
 mkdir prometheus
 tar xvfz prometheus-2.37.2.linux-amd64.tar.gz -C prometheus
+rm -f  prometheus-2.37.2.linux-amd64.tar.gz
 ```
 
 ![Screenshot 2022-11-06 at 16 13 30](https://user-images.githubusercontent.com/67023632/200175793-77bd4764-cb3f-4e57-9489-1a658a59f3b3.png)
+
+
+**3** Go to extracted directory and start the prometheus server using this command `./prometheus`
+
+``` bash
+cd prometheus/prometheus-2.37.2.linux-amd64/
+./prometheus
+```
+
+![Screenshot 2022-11-06 at 16 27 16](https://user-images.githubusercontent.com/67023632/200176521-56727b15-8954-40e9-abbf-82f674a9a697.png)
+
 
 **What is Node Exporter?** 
 
