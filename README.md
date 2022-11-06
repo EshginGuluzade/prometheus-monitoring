@@ -2,7 +2,7 @@
 
 ## 1. Setting Up Prometheus 
 
-**What is Prometheus?**
+### What is Prometheus?
 
 - It is an open-source systems monitoring and alerting toolkit which collects and aggregates metrics as time series data. It stores a variety of events such as memory consumption, CPU and network uitilization, indiviudal incoming/outgoing requets and etc. 
 
