@@ -33,8 +33,6 @@ cd prometheus/prometheus-2.37.2.linux-amd64/
 ./prometheus
 ```
 
-![Screenshot 2022-11-06 at 16 27 16](https://user-images.githubusercontent.com/67023632/200176521-56727b15-8954-40e9-abbf-82f674a9a697.png)
-
 **4.** Prometheus will start listening for connections at default port **9090**. 
 
 **5.** If you use local linux machine you can access Prometheus UI here `http://localhost:9090/`. For this tutorial, I used google cloud that's why prometheus will be accessed using external IP of the instance. In my case, it is `https://34.88.246.220:9090/`
