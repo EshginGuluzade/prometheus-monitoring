@@ -32,7 +32,7 @@ rm -f  prometheus-2.37.2.linux-amd64.tar.gz
 ![Screenshot 2022-11-06 at 16 13 30](https://user-images.githubusercontent.com/67023632/200175793-77bd4764-cb3f-4e57-9489-1a658a59f3b3.png)
 
 
-**3** Go to extracted directory and start the prometheus server using this command `./prometheus`
+**3.** Go to extracted directory and start the prometheus server using this command `./prometheus`.
 
 ``` bash
 cd prometheus/prometheus-2.37.2.linux-amd64/
@@ -40,6 +40,10 @@ cd prometheus/prometheus-2.37.2.linux-amd64/
 ```
 
 ![Screenshot 2022-11-06 at 16 27 16](https://user-images.githubusercontent.com/67023632/200176521-56727b15-8954-40e9-abbf-82f674a9a697.png)
+
+**4.** Prometheus will start listening for connections at default port **9090**. 
+
+**5.** If you use local linux machine you can access Prometheus UI here `http://localhost:9090/`. For this tutorial, I used google cloud that's why prometheus will be accessed using external api of the instance. In this case, it is https://34.88.246.220:9090/
 
 
 **What is Node Exporter?** 
