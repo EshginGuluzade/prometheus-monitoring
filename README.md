@@ -47,13 +47,25 @@ cd prometheus/prometheus-2.37.2.linux-amd64/
 
 **6.** However, none of these adresses will not work because regrdaless of VM is on the cloud or not you need to add firewall rule to allow port 9090.
 
-If you used local linux machine, run below commands:
+If you use local linux machine, run below commands:
 
 ``` bash
 firewall-cmd --add-port 9090/tcp
 firewall-cmd --permanent --add-port 9090/tcp
 systemctl restart firewalld
 ```
+
+If you use google cloud, follow these steps:
+
+1. Go to VPC network/Firewall.
+
+![Screenshot 2022-11-06 at 16 51 20](https://user-images.githubusercontent.com/67023632/200177832-289e253a-f356-401f-838a-1a01248d6471.png)
+
+
+2. Create a new firewall rule
+
+![Screenshot 2022-11-06 at 16 53 38](https://user-images.githubusercontent.com/67023632/200177942-45ce9977-aee0-471c-b562-ee5cea32f530.png)
+
 
 **What is Node Exporter?** 
 
