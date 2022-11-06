@@ -43,11 +43,11 @@ cd prometheus/prometheus-2.37.2.linux-amd64/
 
 **4.** Prometheus will start listening for connections at default port **9090**. 
 
-**5.** If you use local linux machine you can access Prometheus UI here `http://localhost:9090/`. For this tutorial, I used google cloud that's why prometheus will be accessed using external api of the instance. In my case, it is `https://34.88.246.220:9090/`
+**5.** If you use local linux machine you can access Prometheus UI here `http://localhost:9090/`. For this tutorial, I used google cloud that's why prometheus will be accessed using external IP of the instance. In my case, it is `https://34.88.246.220:9090/`
 
 ![Screenshot 2022-11-06 at 16 57 20](https://user-images.githubusercontent.com/67023632/200178177-0a58d9f3-76f0-49c4-b02b-05449314b4a9.png)
 
-**6.** However, none of these adresses will not work because regrdaless of VM is on the cloud or not you need to add firewall rule to allow port 9090.
+**6.** However, none of these adresses will not work because regardless of VM is on the cloud or not you need to add firewall rule to allow port 9090.
 
 If you use local linux machine, run below commands:
 
@@ -64,9 +64,17 @@ If you use google cloud, follow these steps:
 ![Screenshot 2022-11-06 at 16 51 20](https://user-images.githubusercontent.com/67023632/200177832-289e253a-f356-401f-838a-1a01248d6471.png)
 
 
-2. Create a new firewall rule
+2. Create a new firewall rule.
 
 ![Screenshot 2022-11-06 at 16 55 48](https://user-images.githubusercontent.com/67023632/200178090-3def84a5-058a-46e7-9662-f4b60da748bd.png)
+
+3. Use below configuration and press *create* button.
+
+![Screenshot 2022-11-06 at 17 02 55](https://user-images.githubusercontent.com/67023632/200178509-7f811553-5937-4a89-810b-1735f4bcf2d2.png)
+
+4. Go to external IP of the instance using port 9090. In my case, it is `https://34.88.246.220:9090/`
+
+![Screenshot 2022-11-06 at 17 07 15](https://user-images.githubusercontent.com/67023632/200178751-9c666d63-8c6e-4fa4-8715-e5e52d9b0e1c.png)
 
 
 **What is Node Exporter?** 
