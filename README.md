@@ -10,9 +10,15 @@ I will install prometheus in my *Linux Machine - CentOS* which runs in [Google C
 
 ### Installation Steps
 
-1. From [Prometheus Download](https://prometheus.io/download/) page, download latest stable version in `/tmp` directory. At the time of writing this tutorial, latest stable version is 2.37.2.
+**1.** From [Prometheus Download](https://prometheus.io/download/) page, download latest stable version in `/tmp` directory. At the time of writing this tutorial, latest stable version is 2.37.2.
 
-![Screenshot 2022-11-06 at 15 53 56](https://user-images.githubusercontent.com/67023632/200174808-2a09e7f1-d069-4c04-bd12-b2754adc1c2d.png)
+![Download Page](https://user-images.githubusercontent.com/67023632/200174808-2a09e7f1-d069-4c04-bd12-b2754adc1c2d.png)
+
+You can use `wget` command to download the compressed file. Copy the link address of the file that you want to download and then run the command in your terminal.
+
+`wget "link address"`
+
+**2.**  
 
 
 **What is Node Exporter?** 
