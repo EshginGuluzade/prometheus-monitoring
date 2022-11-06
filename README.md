@@ -43,8 +43,17 @@ cd prometheus/prometheus-2.37.2.linux-amd64/
 
 **4.** Prometheus will start listening for connections at default port **9090**. 
 
-**5.** If you use local linux machine you can access Prometheus UI here `http://localhost:9090/`. For this tutorial, I used google cloud that's why prometheus will be accessed using external api of the instance. In this case, it is `https://34.88.246.220:9090/`
+**5.** If you use local linux machine you can access Prometheus UI here `http://localhost:9090/`. For this tutorial, I used google cloud that's why prometheus will be accessed using external api of the instance. In my case, it is `https://34.88.246.220:9090/`
 
+**6.** However, none of these adresses will not work because regrdaless of VM is on the cloud or not you need to add firewall rule to allow port 9090.
+
+If you used local linux machine, run below commands:
+
+``` bash
+firewall-cmd --add-port 9090/tcp
+firewall-cmd --permanent --add-port 9090/tcp
+systemctl restart firewalld
+```
 
 **What is Node Exporter?** 
 
