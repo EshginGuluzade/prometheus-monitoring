@@ -25,8 +25,8 @@ You can use `wget` command to download the compressed file. Copy the link addres
 
 **2.**  Create directory called **prometheus** and extract the downloaded file to that directory.
 
-`mkdir prometheus`. 
-`tar xvfz prometheus-2.37.2.linux-amd64.tar.gz -C prometheus`. 
+`mkdir prometheus`<br/>
+`tar xvfz prometheus-2.37.2.linux-amd64.tar.gz -C prometheus`
 
 ![Screenshot 2022-11-06 at 16 13 30](https://user-images.githubusercontent.com/67023632/200175793-77bd4764-cb3f-4e57-9489-1a658a59f3b3.png)
 
