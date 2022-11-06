@@ -78,6 +78,13 @@ If you use google cloud, follow these steps:
 
 5. If you execute `up` command, it will show you instances which are in UP state. Right now, we only have one instance and since the prometheus runs on this instance, it will display this nessage `up{instance="localhost:9090", job="prometheus"}`. If we add IP adresses of other instances to configuration file of prometheus, it will display those instances,as well. We will add another instance when we install node exporter in part 2.
 
+![Screenshot 2022-11-06 at 17 17 38](https://user-images.githubusercontent.com/67023632/200179171-44b832a1-92f0-4202-8c03-94ee9daab096.png)
+
+6. You can also access Prometheus metrics by visiting `http://localhost:9090/` for local machine or `https://34.88.246.220:9090/` for google cloud instance.
+
+![Screenshot 2022-11-06 at 17 20 24](https://user-images.githubusercontent.com/67023632/200179262-acdbb2cb-a8f6-4683-b326-114b43409287.png)
+
+
 # Part 2 - Node Exporter
 
 ## 1. Setting Up Prometheus 
