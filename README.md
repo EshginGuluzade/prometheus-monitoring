@@ -76,9 +76,9 @@ If you use google cloud, follow these steps:
 
 ![Screenshot 2022-11-06 at 17 20 24](https://user-images.githubusercontent.com/67023632/200179262-acdbb2cb-a8f6-4683-b326-114b43409287.png)
 
-## 2.Setup Prometheus as Ssytemd Service [Optional]
+## 2. Setup Prometheus as Systemd Service [Optional]
 
-**1.** In step 3, we said that in order to start prometheus server we need to use command `./prometheus` from the extracted directory. The problem with this method is that it will keep your terminal and you will not be able to run other commands in the terminal session. If you want to run other commands you will need to stop it by `Ctrl + C`. Therefore, to remove this issue, it is better to setup Prometheus as **Systemd service**.
+**1.** In step 3, we said that in order to start prometheus server we need to use command `./prometheus` from the extracted directory. The problem with this method is that it will keep your terminal running and you will not be able to run other commands in the current terminal session. If you want to run other commands you will need to stop it by `Ctrl + C`. Therefore, to remove this issue, it is better to setup Prometheus as **Systemd service**.
 
 **2.** Create prometheus user, required directories and make prometheus user as owner of the directories.
 
