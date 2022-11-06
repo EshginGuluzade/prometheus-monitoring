@@ -45,6 +45,8 @@ cd prometheus/prometheus-2.37.2.linux-amd64/
 
 **5.** If you use local linux machine you can access Prometheus UI here `http://localhost:9090/`. For this tutorial, I used google cloud that's why prometheus will be accessed using external api of the instance. In my case, it is `https://34.88.246.220:9090/`
 
+![Screenshot 2022-11-06 at 16 57 20](https://user-images.githubusercontent.com/67023632/200178177-0a58d9f3-76f0-49c4-b02b-05449314b4a9.png)
+
 **6.** However, none of these adresses will not work because regrdaless of VM is on the cloud or not you need to add firewall rule to allow port 9090.
 
 If you use local linux machine, run below commands:
@@ -64,7 +66,7 @@ If you use google cloud, follow these steps:
 
 2. Create a new firewall rule
 
-![Screenshot 2022-11-06 at 16 53 38](https://user-images.githubusercontent.com/67023632/200177942-45ce9977-aee0-471c-b562-ee5cea32f530.png)
+![Screenshot 2022-11-06 at 16 55 48](https://user-images.githubusercontent.com/67023632/200178090-3def84a5-058a-46e7-9662-f4b60da748bd.png)
 
 
 **What is Node Exporter?** 
