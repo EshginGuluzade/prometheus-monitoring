@@ -181,7 +181,7 @@ cd node-exporter/node_exporter-1.4.0.linux-amd64/
 
 **4.** Node-exporter will start listening for connections at default port **9100**. 
 
-**5.** If you use local linux machine you can access Node-exporter metrics here `http://localhost:9100/`. For this tutorial, I used google cloud that's why node-exporter will be accessed using external IP of the instance. In my case, it is `https://34.88.246.220:9100/`
+**5.** If you use local linux machine you can access Node-exporter metrics here `http://localhost:9100/`. For this tutorial, I used google cloud that's why node-exporter will be accessed using external IP of the instance. In my case, it is `https://35.228.93.221:9100/`
 
 ![Screenshot 2022-11-20 at 18 04 53](https://user-images.githubusercontent.com/67023632/202912613-6a4b3264-a3cd-49aa-8360-6c343b3dcdfb.png)
 
@@ -208,18 +208,80 @@ If you use google cloud, follow these steps:
 
 - Use below configuration and press *create* button.
 
-![Screenshot 2022-11-06 at 17 02 55](https://user-images.githubusercontent.com/67023632/200178509-7f811553-5937-4a89-810b-1735f4bcf2d2.png)
+![Screenshot 2022-11-20 at 18 08 27](https://user-images.githubusercontent.com/67023632/202912871-64653bb7-46c4-48cf-b67a-4dfb297c252b.png)
 
-- Go to external IP of the instance using port 9090. In my case, it is `https://34.88.246.220:9090/`
+- Go to external IP of the instance using port 9100. In my case, it is `https://35.228.93.221:9100/`
 
-![Screenshot 2022-11-06 at 17 07 15](https://user-images.githubusercontent.com/67023632/200178751-9c666d63-8c6e-4fa4-8715-e5e52d9b0e1c.png)
+![Screenshot 2022-11-20 at 18 12 06](https://user-images.githubusercontent.com/67023632/202912985-088ddbd7-59fb-4479-ad57-15e4da752b76.png)
 
-- If you execute `up` command, it will show you instances which are in UP state. Right now, we only have one instance and since the prometheus runs on this instance, it will display this nessage `up{instance="localhost:9090", job="prometheus"}`. If we add IP adresses of other instances to configuration file of prometheus, it will display those instances,as well. We will add another instance when we install node exporter in part 2.
+- You can also access Node Exporter by visiting `http://localhost:9100/` for local machine or `https://35.228.93.221:9100/` for google cloud instance.
 
-![Screenshot 2022-11-06 at 17 17 38](https://user-images.githubusercontent.com/67023632/200179171-44b832a1-92f0-4202-8c03-94ee9daab096.png)
+## 2. Setup Node-exporter as Systemd Service [Optional]
 
-- You can also access Prometheus metrics by visiting `http://localhost:9090/` for local machine or `https://34.88.246.220:9090/` for google cloud instance.
+**1.** In step 3, we said that in order to start node-exporter we need to use command `./node_exporter` from the extracted directory. The problem with this method is that it will keep your terminal running and you will not be able to run other commands in the current terminal session. If you want to run other commands you will need to stop it by `Ctrl + C`. Therefore, to remove this issue, it is better to setup Node-exporter as **Systemd service**.
 
-![Screenshot 2022-11-06 at 17 20 24](https://user-images.githubusercontent.com/67023632/200179262-acdbb2cb-a8f6-4683-b326-114b43409287.png)
+**2.** Create node_exporter user, required directory and make node-exporter user as owner of the directory.
 
-## 2. Setup Prometheus as Systemd Service [Optional]
+``` bash
+useradd --no-create-home --shell /bin/false node_exporter
+mkdir /etc/node_exporter
+chown node_exporter:node_exporter /etc/node_exporter
+```
+
+**3.** Copy *node_exporter* from the extracted directory to */usr/local/bin* and change the ownership to prometheus.
+
+``` bash
+cp /root/node-exporter/node_exporter-1.4.0.linux-amd64/node_exporter /usr/local/bin/
+chown node_exporter:node_exporter /usr/local/bin/node_exporter
+```
+
+**4.** Create node_exporter service file.
+
+``` bash
+vi /etc/systemd/system/node_exporter.service
+```
+
+**5.** Copy the following content to that file and save.
+
+``` 
+[Unit]
+Description=Node-Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**6.** Reload the systemd service, enable service to start at boot time and start the service.
+
+``` bash
+systemctl daemon-reload
+systemctl enable node_exporter
+systemctl start node_exporter
+```
+**7.** Go to Node Exporter address - `http://localhost:9090/` for local machine or `https://35.228.93.221:9090/` for google cloud instance.
+
+## 3. Configure Node Exporter Host as Target on Prometheus Host
+
+**1.** Open `/etc/prometheus/prometheus.yml` file and paste following content to that file
+
+``` bash
+  - job_name: "node-exporter"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["35.228.98.148:9100"]
+```
+
+**2.** Restart prometheus service
+
+``` bash
+systemctl restart prometheus
+```
+
