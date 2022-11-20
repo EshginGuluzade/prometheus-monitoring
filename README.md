@@ -156,4 +156,11 @@ systemctl start prometheus
 
 - There are a lot of exporters which are provided by Prometheus itself. Exporters are used to expose metrics so that Prometheus can collect. Node Exporter is one of the simple exporters out there and it is used to collect basic system metrics from the Linux machine. You can also write your own exporter to expose your application's metrics but it is out of scope of this tutorial.
 
+### Installation Steps
+
+**1.** From [Prometheus Download](https://prometheus.io/download/) page, download latest stable version of node exporter. At the time of writing this tutorial, latest stable version is 1.4.0.
+
+![Download Page](https://user-images.githubusercontent.com/67023632/200174808-2a09e7f1-d069-4c04-bd12-b2754adc1c2d.png)
+
+You can use `wget` command to download the compressed file. Copy the link address of the file that you want to download and then run the command in your terminal.
 
