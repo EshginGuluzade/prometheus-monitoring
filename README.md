@@ -266,7 +266,7 @@ systemctl daemon-reload
 systemctl enable node_exporter
 systemctl start node_exporter
 ```
-**7.** Go to Node Exporter address - `http://localhost:9090/` for local machine or `https://35.228.93.221:9090/` for google cloud instance.
+**7.** Go to Node Exporter address - `http://localhost:9100/` for local machine or `https://35.228.93.221:9100/` for google cloud instance.
 
 ## 3. Configure Node Exporter Host as Target on Prometheus Host
 
@@ -276,7 +276,7 @@ systemctl start node_exporter
   - job_name: "node-exporter"
     scrape_interval: 5s
     static_configs:
-      - targets: ["35.228.98.148:9100"]
+      - targets: ["35.228.93.221:9100"]
 ```
 
 **2.** Restart prometheus service
