@@ -285,3 +285,143 @@ systemctl start node_exporter
 systemctl restart prometheus
 ```
 
+# Part 3 - Grafana
+
+## 1. Setting Up Grafana
+
+**What is Grafana?** 
+
+- Grafana is an open-source interactive data-visualization platform for visualizing metrics, logs, and traces collected from your applications. It allows users to see their data via charts and graphs that are unified into dashboards for easier interpretation and understanding.
+
+### Installation Steps
+
+**1.** From [Grafana Download](https://grafana.com/grafana/download?platform=linux) page, download latest stable version of Grafana. At the time of writing this tutorial, latest stable version is 9.2.6.
+
+![Screenshot 2022-11-20 at 17 48 59](https://user-images.githubusercontent.com/67023632/202911828-5b8e72a3-dabe-4187-99b9-64b8ec3ef28b.png)
+
+You can use `wget` command to download the compressed file. 
+``` bash
+wget https://dl.grafana.com/enterprise/release/grafana-enterprise-9.2.6.linux-amd64.tar.gz
+```
+
+**2.**  Create directory called **grafana** and extract the downloaded file to that directory. Then you can delete zip file.
+
+``` bash
+mkdir grafana
+tar xvfz grafana-enterprise-9.2.6.linux-amd64.tar.gz -C grafana
+rm -f  grafana-enterprise-9.2.6.linux-amd64.tar.gz
+```
+
+**3.** Go to extracted directory and start the grafana using this command `./bin/grafana-server`.
+
+``` bash
+cd grafana/grafana-9.2.6/
+./bin/grafana-server
+```
+
+**4.** Grafana will start listening for connections at default port **3000**. 
+
+**5.** If you use local linux machine you can access Grafana UI here `http://localhost:3000/`. For this tutorial, I used google cloud that's why Grafana UI will be accessed using external IP of the instance. In my case, it is `https://35.228.93.221:3000/`
+
+![Screenshot 2022-11-20 at 18 04 53](https://user-images.githubusercontent.com/67023632/202912613-6a4b3264-a3cd-49aa-8360-6c343b3dcdfb.png)
+
+**6.** However, none of these adresses will not work because regardless of VM is on the cloud or not, you need to add firewall rule to allow port 3000.
+
+If you use local linux machine, run below commands:
+
+``` bash
+firewall-cmd --add-port 3000/tcp
+firewall-cmd --permanent --add-port 3000/tcp
+systemctl restart firewalld
+```
+
+If you use google cloud, follow these steps:
+
+- Go to VPC network/Firewall.
+
+![Screenshot 2022-11-06 at 16 51 20](https://user-images.githubusercontent.com/67023632/200177832-289e253a-f356-401f-838a-1a01248d6471.png)
+
+
+- Create a new firewall rule.
+
+![Screenshot 2022-11-06 at 16 55 48](https://user-images.githubusercontent.com/67023632/200178090-3def84a5-058a-46e7-9662-f4b60da748bd.png)
+
+- Use below configuration and press *create* button.
+
+![Screenshot 2022-11-20 at 18 08 27](https://user-images.githubusercontent.com/67023632/202912871-64653bb7-46c4-48cf-b67a-4dfb297c252b.png)
+
+- Go to external IP of the instance using port 3000. In my case, it is `https://35.228.93.221:3000/`
+
+![Screenshot 2022-11-20 at 18 12 06](https://user-images.githubusercontent.com/67023632/202912985-088ddbd7-59fb-4479-ad57-15e4da752b76.png)
+
+- You can also access Grafana UI by visiting `http://localhost:3000/` for local machine or `https://35.228.93.221:3000/` for google cloud instance.
+
+## 2. Setup Grafana as Systemd Service [Optional]
+
+**1.** In step 3, we said that in order to start grafana we need to use command `./bin/grafana-server` from the extracted directory. The problem with this method is that it will keep your terminal running and you will not be able to run other commands in the current terminal session. If you want to run other commands you will need to stop it by `Ctrl + C`. Therefore, to remove this issue, it is better to setup Grafana as **Systemd service**.
+
+**2.** Create grafana user, required directory and make grafana user as owner of the directory.
+
+``` bash
+useradd --no-create-home --shell /bin/false grafana
+mkdir /etc/grafana
+chown grafana:grafana /etc/grafana
+```
+
+**3.** Copy *grafana-server* from the extracted directory to */usr/local/bin* and change the ownership to grafana.
+
+``` bash
+cp /root/grafana/grafana-9.2.6/bin/grafana-server /usr/local/bin/
+chown grafana:grafana /usr/local/bin/grafana-server
+```
+
+**4.** Create grafana service file.
+
+``` bash
+vi /etc/systemd/system/grafana.service
+```
+
+**5.** Copy the following content to that file and save.
+
+``` 
+[Unit]
+Description=Grafana
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=grafana
+Group=grafana
+Type=simple
+ExecStart=/usr/local/bin/grafana-server
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**6.** Reload the systemd service, enable service to start at boot time and start the service.
+
+``` bash
+systemctl daemon-reload
+systemctl enable grafana
+systemctl start grafana
+```
+**7.** Go to Node Exporter address - `http://localhost:9100/` for local machine or `https://35.228.93.221:9100/` for google cloud instance.
+
+## 3. Configure Node Exporter Host as Target on Prometheus Host
+
+**1.** Open `/etc/prometheus/prometheus.yml` file and paste following content to that file
+
+``` bash
+  - job_name: "node-exporter"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["35.228.93.221:9100"]
+```
+
+**2.** Restart prometheus service
+
+``` bash
+systemctl restart prometheus
+```
+
